@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="http://cdn.binaryjs.com/0/binary.js"></script>
+    <style>
+        body {
+            background: #222;
+            text-align: center;
+        }
+
+        h1 {
+            color: #555;
+            font: bold 50px Arial;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="../src/transmitter.js"></script>
+
+<script>
+
+    if('ontouchstart' in window) {
+        document.write('<h1>Touch me</h1>');
+    } else {
+        document.write('<h1>Open this page on your touch device</h1>');
+    }
+
+</script>
+
+
+</body>
+</html>

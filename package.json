@@ -1,0 +1,19 @@
+{
+    "name": "remote",
+    "title": "Remote.JS",
+    "description": "Use your touch device to control your desktop browser",
+    "version": "0.0.1",
+    "author": {
+        "name": "Jorik Tangelder",
+        "email": "j.tangelder@gmail.com"
+    },
+    "devDependencies": {
+        "grunt": "0.4.x",
+        "grunt-contrib-connect": "0.1.x",
+        "grunt-contrib-concat": "0.1.x",
+        "grunt-contrib-watch": "0.2.x",
+        "faketouches": "0.0.x",
+        "hammerjs": "1.0.x",
+        "binaryjs": "0.1.x"
+    }
+}
