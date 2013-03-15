@@ -48,3 +48,7 @@ client.on('open', function(){
         }
     });
 });
+
+client.on('error', function(ev) {
+    console.log(ev);
+});
