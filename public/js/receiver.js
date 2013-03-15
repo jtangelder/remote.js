@@ -1,4 +1,4 @@
-var client = new BinaryClient('ws://'+window.location.hostname+':9000');
+var client = new BinaryClient('ws://'+window.location.hostname+'/socket');
 var stream;
 var room = 1;
 
