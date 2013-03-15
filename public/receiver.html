@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        body {
+            background: silver;
+            font: 20px Arial;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Detected gesture: <span id="gesture"></span></h1>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="../node_modules/faketouches/dist/faketouches.js"></script>
+<script src="../node_modules/hammerjs/dist/hammer.js"></script>
+<script src="../node_modules/hammerjs/plugins/hammer.showtouches.js"></script>
+
+<script>
+
+    var logger = document.getElementById('gesture');
+
+    Hammer.HAS_TOUCHEVENTS = true;
+    Hammer.plugins.showTouches(true);
+    Hammer(document.body).on("tap doubletap hold drag swipe pinch rotate", function(ev) {
+        logger.innerHTML = ev.type;
+    });
+
+
+</script>
+
+<script src="http://cdn.binaryjs.com/0/binary.js"></script>
+<script src="../src/receiver.js"></script>
+
+</body>
+</html>
