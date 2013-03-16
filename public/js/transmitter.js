@@ -10,7 +10,7 @@
 
 
     Transmitter.INTERVAL = 1000/20;
-    Transmitter.SOCKET_ADDR = 'http://remotejs.joriktangelder.nl:9000';
+    Transmitter.SOCKET_ADDR = 'http://'+ location.hostname +':9000';
 
 
     Transmitter.prototype.init = function() {

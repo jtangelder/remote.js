@@ -8,7 +8,7 @@
     }
 
 
-    Receiver.SOCKET_ADDR = 'http://remotejs.joriktangelder.nl:9000';
+    Receiver.SOCKET_ADDR = 'http://'+ location.hostname +':9000';
     Receiver.TOUCH_TEMPLATE = '<div class="touch"></div>';
 
 
