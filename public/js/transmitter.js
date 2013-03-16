@@ -8,6 +8,7 @@
         this.screen = {};
     }
 
+    MicroEvent.mixin(Transmitter);
 
     Transmitter.INTERVAL = 1000/20;
     Transmitter.SOCKET_ADDR = 'http://'+ location.hostname +':9000';
@@ -30,6 +31,7 @@
         this.socket.emit('identify', 'transmitter');
         this.socket.on('identified', function(key) {
             self.key = key;
+            self.trigger("identified", self);
             cb();
         });
     };

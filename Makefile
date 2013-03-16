@@ -10,6 +10,6 @@ restart:
 	@echo "Restart server..."
 	forever restart app/server.js
 
-dev:
+http:
 	@echo "Starting devserver..."
-	 supervisor -w app app/server.js
+	node webserver.js

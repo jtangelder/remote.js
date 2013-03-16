@@ -6,11 +6,12 @@
     <style>
         body {
             background: #222;
+            color: #555;
+            font: 14px Arial;
             text-align: center;
         }
 
         h1 {
-            color: #555;
             font: bold 50px Arial;
             margin-top: 100px;
         }
@@ -21,16 +22,20 @@
 <body>
 
 <script src="http://remotejs.joriktangelder.nl:9000/socket.io/socket.io.js"></script>
+<script src="/js/microevent.js"></script>
 <script src="/js/transmitter.js"></script>
 
 <script>
 
-    var tm = new Transmitter();
-
     if('ontouchstart' in window) {
-        tm.init();
 
-        document.write('<h1>Touch me</h1>');
+        var tm = new Transmitter();
+        tm.init();
+        tm.bind("identified", function() {
+            document.getElementById('key').innerHTML = tm.key;
+        });
+
+        document.write('<h1>Touch me</h1><p>Your unique key is: <span id="key">...</span></p>');
     } else {
         document.write('<h1>Open this page on your touch device</h1>');
     }

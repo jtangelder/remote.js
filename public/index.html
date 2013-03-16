@@ -56,11 +56,11 @@
             top: 0;
             left: 0;
             border-radius: 15px;
-            border: solid 2px #000;
+            border: solid 1px #000;
             background: #fff;
             opacity: .5;
             margin: -10px;
-            box-shadow: 0 0 5px rgba(0,0,0,.2);
+            box-shadow: 0 0 5px rgba(0,0,0,.6);
         }
 
         .me .touch {
@@ -68,6 +68,8 @@
             height: 25px;
             width: 25px;
             margin: -14px;
+            box-shadow: 0 0 10px rgba(0,0,0,.6);
+            background: blue;
         }
 
     </style>
@@ -93,7 +95,8 @@
             Let users use their touchdevice as a remote control for your webapp. Control slideshows,
             play games, etc. Without installing a app.
         </p>
-        <a class="btn btn-large btn-success" href="/remote.html">Open the RC on your device</a>
+        <p><a class="btn btn-large btn-success" href="/remote.html">Open the RC on your device</a></p>
+        <p><a href="#" class="identify-me">Identify your touches</a></p>
     </div>
 
     <hr>
@@ -109,15 +112,28 @@
         </p>
     </div>
 
+    <hr>
+
+    <div class="footer">
+        &copy; Jorik Tangelder
+    </div>
+
 </div> <!-- /container -->
 
 
 <script src="http://zeptojs.com/zepto.min.js"></script>
 <script src="http://remotejs.joriktangelder.nl:9000/socket.io/socket.io.js"></script>
+<script src="/js/microevent.js"></script>
 <script src="/js/receiver.js"></script>
 <script>
     var receive = new Receiver();
     receive.init();
+
+    $("a.identify-me").bind("click", function(ev) {
+        var code = prompt('Enter the unique code displayed on your remote.');
+        receive.identifyTouches(code);
+        ev.preventDefault();
+    });
 </script>
 
 </body>

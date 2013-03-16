@@ -7,6 +7,8 @@
         this.remotes = {};
     }
 
+    MicroEvent.mixin(Receiver);
+
 
     Receiver.SOCKET_ADDR = 'http://'+ location.hostname +':9000';
     Receiver.TOUCH_TEMPLATE = '<div class="touch"></div>';
@@ -26,6 +28,7 @@
         this.socket.emit('identify', 'receiver');
         this.socket.on('identified', function(key) {
             self.key = key;
+            self.trigger("identified", self);
             cb();
         });
     };
@@ -93,6 +96,13 @@
         // remove old touches
         for(var i=touches.length; i<touch_elements.length; i++) {
             $(touch_elements[i]).remove();
+        }
+    };
+
+
+    Receiver.prototype.identifyTouches = function(key) {
+        if(this.remotes[key]) {
+            this.remotes[key].element.addClass("me");
         }
     };
 
