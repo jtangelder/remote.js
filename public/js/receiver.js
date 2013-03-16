@@ -8,7 +8,7 @@
     }
 
 
-    Receiver.SOCKET_ADDR = 'http://'+window.location.hostname;
+    Receiver.SOCKET_ADDR = 'http://194.33.112.64:9000/';
     Receiver.TOUCH_TEMPLATE = '<div class="touch"></div>';
 
 

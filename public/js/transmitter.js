@@ -4,13 +4,13 @@
         this.socket = null;
         this.key = null;
 
-        this._eventData = null;
-        this._screen = {};
+        this.eventData = null;
+        this.screen = {};
     }
 
 
     Transmitter.INTERVAL = 1000/20;
-    Transmitter.SOCKET_ADDR = 'http://'+window.location.hostname;
+    Transmitter.SOCKET_ADDR = 'http://194.33.112.64:9000/';
 
 
     Transmitter.prototype.init = function() {
