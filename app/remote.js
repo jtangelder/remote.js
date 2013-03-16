@@ -56,17 +56,3 @@ function transmitterSocket(io, socket) {
 function receiverSocket(io, socket) {
 
 }
-
-
-/**
- * normalize the x/y positions
- * @param x
- * @param y
- * @param w
- * @param h
- * @param to_w
- * @param to_h
- */
-function normalizeXY(x,y, w,h, to_w, to_h) {
-
-}
