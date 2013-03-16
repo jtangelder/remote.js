@@ -16,6 +16,7 @@
     Transmitter.prototype.init = function() {
         var self = this;
         this.socket = window.io.connect(Transmitter.SOCKET_ADDR);
+
         this.identify(function() {
             self.bindEvents();
             self.sendTouches();

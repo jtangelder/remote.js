@@ -34,12 +34,6 @@
     Receiver.prototype.bindEvents = function() {
         var self = this;
 
-        ['resize','orientationchange','load'].forEach(function(event) {
-            window.addEventListener(event, function(ev) {
-                self.getViewportSize();
-            });
-        });
-
         // new remote
         this.socket.on('transmitter_hi', function(key) {
             self.addRemote(key);

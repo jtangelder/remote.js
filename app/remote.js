@@ -1,6 +1,9 @@
 var uniqueId = require(__dirname +'/unique_id.js').uniqueId;
 
 exports.create = function(io) {
+    // only websockets, no fallbacks
+    io.set('transports', ['websocket']);
+
     io.sockets.on('connection', function (socket) {
         // on connect the type of listener must be set
         // and a unique key for the transmitters
