@@ -7,7 +7,7 @@ var express = require('express'),
 app.enable('trust proxy');
 app.use(express.static('public'));
 
-server.listen(80);
+server.listen(9000);
 
 
 app.get('/', function (req, res) {
