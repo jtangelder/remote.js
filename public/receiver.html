@@ -7,32 +7,38 @@
             background: silver;
             font: 20px Arial;
         }
+
+        .touch {
+            width: 15px;
+            height: 15px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+            border: solid 2px #000;
+            background: #fff;
+            opacity: .8;
+        }
+
+        .touch.me {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            border: solid 4px blue;
+        }
+
     </style>
 </head>
 <body>
 
-<h1>Detected gesture: <span id="gesture"></span></h1>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="js/faketouches.js"></script>
-<script src="js/hammer.min.js"></script>
-<script src="js/hammer.showtouches.js"></script>
-
+<script src="http://zeptojs.com/zepto.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/receiver.js"></script>
 <script>
-
-    var logger = document.getElementById('gesture');
-
-    Hammer.HAS_TOUCHEVENTS = true;
-    Hammer.plugins.showTouches(true);
-    Hammer(document.body).on("tap doubletap hold drag swipe pinch rotate", function(ev) {
-        logger.innerHTML = ev.type;
-    });
-
-
+    var receive = new Receiver();
+    receive.init();
 </script>
-
-<script src="http://cdn.binaryjs.com/0/binary.js"></script>
-<script src="js/receiver.js"></script>
 
 </body>
 </html>

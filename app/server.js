@@ -1,23 +1,19 @@
-var fs = require('fs');
-var BinaryServer = require('binaryjs').BinaryServer;
+var express = require('express'),
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server),
+    remote = require(__dirname +'/remote.js').create(io);
 
-var rooms = {};
+app.enable('trust proxy');
+app.use(express.static('public'));
+
+server.listen(80);
 
 
-var socket = BinaryServer({port: 9000});
+app.get('/', function (req, res) {
+    res.sendfile('public/receiver.html');
+});
 
-// Wait for new user connections
-socket.on('connection', function(client){
-    client.on('error', function(e) {
-        console.log(e.stack, e.message);
-    });
-
-    client.on('stream', function(stream, meta){
-        if(meta.type == 'transmitter') {
-            rooms[meta.room] = stream;
-        }
-        else if (meta.type == 'receiver' && rooms[meta.room]) {
-            rooms[meta.room].pipe(stream);
-        }
-    });
+app.get('/rc', function (req, res) {
+    res.sendfile('public/transmitter.html');
 });

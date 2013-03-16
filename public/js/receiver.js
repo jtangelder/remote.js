@@ -1,54 +1,107 @@
-var client = new BinaryClient('ws://'+window.location.hostname+'/socket');
-var stream;
-var room = 1;
+(function(exports, undefined) {
 
-var faker = new FakeTouches(document.body);
-faker.triggerStart();
+    function Receiver() {
+        this.socket = null;
+        this.key = null;
 
-client.on('open', function(){
-    stream = client.createStream({room: room, type: 'receiver'});
-    stream.on('data', function(data) {
-        var touches = [];
-        var percentX = (100/data.width);
-        var percentY = (100/data.height);
+        this.remotes = {};
+    }
 
-        var screenWidth = document.documentElement.clientWidth;
-        var screenHeight = document.documentElement.clientHeight;
 
-        for(var i=0; i<data.touches.length; i++) {
-            touches.push([  (percentX * data.touches[i].pageX) * (screenWidth/100),
-                            (percentY * data.touches[i].pageY) * (screenHeight/100)]);
+    Receiver.SOCKET_ADDR = 'http://'+window.location.hostname;
+    Receiver.TOUCH_TEMPLATE = '<div class="touch"></div>';
+
+
+    Receiver.prototype.init = function() {
+        var self = this;
+        this.socket = window.io.connect(Receiver.SOCKET_ADDR);
+        this.identify(function() {
+            self.bindEvents();
+        });
+    };
+
+
+    Receiver.prototype.identify = function(cb) {
+        var self = this;
+        this.socket.emit('identify', 'receiver');
+        this.socket.on('identified', function(key) {
+            self.key = key;
+            cb();
+        });
+    };
+
+
+    Receiver.prototype.bindEvents = function() {
+        var self = this;
+
+        ['resize','orientationchange','load'].forEach(function(event) {
+            window.addEventListener(event, function(ev) {
+                self.getViewportSize();
+            });
+        });
+
+        // new remote
+        this.socket.on('transmitter_hi', function(key) {
+            self.addRemote(key);
+        });
+
+        // remote is gone
+        this.socket.on("transmitter_bye", function(key) {
+            self.removeRemote(key);
+        });
+
+        // remote is moving!
+        this.socket.on('movement', function(data) {
+            if(!self.remotes[data.key]) {
+                self.addRemote(data.key);
+            }
+            self.showRemote(data.key, data.touches);
+        });
+    };
+
+
+    Receiver.prototype.addRemote = function(key) {
+        var element = $("<div class='remote'></div>")
+            .attr("id", "remote_"+key)
+            .appendTo('body');
+
+        this.remotes[key] = {
+            color: '#'+ Math.floor(Math.random()*16777215).toString(16), // random color
+            element: element
+        };
+    };
+
+
+    Receiver.prototype.removeRemote = function(key) {
+        if(this.remotes[key]) {
+            this.remotes[key].element.remove();
+            delete this.remotes[key];
         }
+    };
 
-        faker.setTouches(touches);
 
-        switch(data.type) {
-            case 'touchstart':
-                faker.triggerStart();
-                started = true;
-                break;
+    Receiver.prototype.showRemote = function(key, touches)  {
+        var remote = this.remotes[key],
+            touch_elements = remote.element.children();
 
-            case 'touchmove':
-                if(started) {
-                    faker.triggerMove();
-                } else {
-                    faker.triggerStart();
-                }
-                break;
+        touches.forEach(function(touch, index) {
+            var el = touch_elements[index] ||
+                $(Receiver.TOUCH_TEMPLATE)
+                    .css('background', remote.color)
+                    .appendTo(remote.element);
 
-            case 'touchend':
-                faker.triggerEnd();
-                started = false;
-                break;
+            $(el).css({
+                left: touch.x +"%",
+                top: touch.y +"%"
+            });
+        });
 
-            case 'touchcancel':
-                faker.triggerCancel();
-                started = false;
-                break;
+        // remove old touches
+        for(var i=touches.length; i<touch_elements.length; i++) {
+            $(touch_elements[i]).remove();
         }
-    });
-});
+    };
 
-client.on('error', function(ev) {
-    console.log(ev);
-});
+
+    exports.Receiver = Receiver;
+})(this);
