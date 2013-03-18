@@ -20,6 +20,6 @@ Use case: Show all connected remotes on a screen without any identification.
 
 #### Private - Remote to Receiver
 1 or more remotes to a private receiver. Remotes need to type in the unique code the receiver gets. 
-The receiver also can send data to the remotes. The receiver key should become the channel key. 
+All clients can send data around. The receiver key should become the channel key. 
 
 Use case: Let users interact with the PC and control it with their devices, like controlling a presentation.
