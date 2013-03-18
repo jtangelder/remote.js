@@ -2,6 +2,8 @@
 
 Use your touchdevice as input for your desktop browser. Demo is at http://remotejs.joriktangelder.nl/
 
+![Awesome](http://us.123rf.com/400wm/400/400/inspirestock/inspirestock1112/inspirestock111206851/11428941-man-sitting-on-the-couch-holding-a-television-remote-control.jpg)
+
 ## Install
 
 `npm install` and run `make start` to start the socketserver on port 9000.
