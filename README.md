@@ -1,8 +1,9 @@
 # Remote.js
 
-Use your touchdevice as input for your desktop browser. Demo is at http://remotejs.joriktangelder.nl/
+### Use your touchdevice as input for your desktop browser. 
+Demo is at http://remotejs.joriktangelder.nl/
 
-![Awesome](http://image.shutterstock.com/display_pic_with_logo/72409/72409,1163258695,1/stock-photo-man-asleep-on-the-couch-with-tv-remote-control-firmly-in-hand-2151450.jpg)
+![This could be you!](http://image.shutterstock.com/display_pic_with_logo/72409/72409,1163258695,1/stock-photo-man-asleep-on-the-couch-with-tv-remote-control-firmly-in-hand-2151450.jpg)
 
 ## Install
 
